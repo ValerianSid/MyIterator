@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public class MyIteratorIntTest {
 
     @Test
-    void remove_should_once(){
+    void remove_once(){
         MyIteratorInt myIteratorInt = new MyIteratorInt(1, 2, 3);
         Assertions.assertThrows(IllegalStateException.class,() -> myIteratorInt.remove());
     }
@@ -22,8 +22,9 @@ public class MyIteratorIntTest {
         MyIteratorInt myIteratorInt = new MyIteratorInt(1, 2, 3);
         myIteratorInt.next();
         myIteratorInt.remove();
-        Assertions.assertEquals(null, myIteratorInt.integerMas[myIteratorInt.currentIndex]);
-        Assertions.assertEquals(-1, myIteratorInt.lastIndex);
+        Integer[] expected = {null, 2, 3};
+        Assertions.assertArrayEquals(expected, myIteratorInt.integerMas);
+        Assertions.assertThrows(IllegalStateException.class,() -> myIteratorInt.remove());
     }
     @Test
     void hasNext_true(){
